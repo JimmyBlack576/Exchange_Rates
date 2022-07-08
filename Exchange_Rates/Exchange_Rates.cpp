@@ -34,13 +34,26 @@ void monthDispay(int a) {
     }
 }
 
+void choice(int month) {
+    do {
+        cout << "Выбрать другой месяц?  1-да/2-нет: \n";
+        cin >> month;
+        if (month == 1) { break; }
+        else if (month == 2) {
+            cout << "До свидания!\n";
+            exit(0);
+        }
+        else { cout << "Указано неверное значение!\n"; }
+    } while (month != 1 && month != 2);
+}
+
 int main()
 {
     setlocale(LC_ALL, "ru");
 
     const int MONTH = 12;
     double rates[MONTH], percent[MONTH];
-    int deposite,month;
+    int deposite,month=0;
     double withdrawal;
     cout << "Какая сумма в евро была внесена на депозит изначально? \n";
     cin >> deposite;
@@ -70,22 +83,14 @@ int main()
         }
         else {
             cout << "Доступно для снятия в этом месяце: ";
-            cout << withdrawal * rates[i-1] / 2 << " $ ";
+            cout << withdrawal * rates[i-1] / 2 << " $ \n";
         }
         //Условие для продолжения цикла после вывода 12ой итерации
         if (i == 12)
         {
             i = 0;
         }
-        do {
-            cout << "Выбрать другой месяц?  1-да/2-нет: \n";
-            cin >> month;
-            if (month == 1) { break; }
-            else if (month == 2) {
-                cout << "До свидания!\n";
-                exit(0); }
-            else { cout << "Указано неверное значение!\n"; }
-        } while (month != 1 && month != 2);
+        choice(month);
     }
 
     return 0;
